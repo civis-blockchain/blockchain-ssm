@@ -7,6 +7,7 @@ import withConnect from "./withConnect";
 import { Page } from "store/actions/navigation";
 import Home from "./Home";
 import AutomatonSessionForm from "./AutomatonSessionForm";
+import Machines from "./Machines";
 
 interface Props {
   page: Page;
@@ -40,6 +41,9 @@ export class App extends React.PureComponent<Props, State> {
           {this.props.page === "HOME_PAGE" && <Home />}
           {this.props.page === "AUTOMATON_SESSION_PAGE" && (
             <AutomatonSessionForm />
+          )}
+          {this.props.page === "MACHINES_PAGE" && (
+            <Machines />
           )}
         </Main>
       </UIContainer>

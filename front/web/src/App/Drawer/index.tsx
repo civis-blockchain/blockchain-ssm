@@ -55,13 +55,15 @@ interface Props {
   open: boolean;
   onClose: () => void;
   goToHome: () => void;
+  goToMachines: () => void;
   goToAutomatonSession: (automatonId: string, sessionId: string) => void;
 }
 export const Drawer = ({
   open,
   onClose,
   goToHome,
-  goToAutomatonSession
+  goToAutomatonSession,
+  goToMachines
 }: Props) => (
   <Nav>
     <Wrapper open={open || undefined}>
@@ -75,6 +77,12 @@ export const Drawer = ({
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
+
+          <ListItem button onClick={goToMachines}>
+            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemText primary="Machine" />
+          </ListItem>
+
         </List>
         <Divider />
         <List>
