@@ -80,7 +80,7 @@ export const Drawer = ({
 
           <ListItem button onClick={goToMachines}>
             <ListItemIcon><InboxIcon /></ListItemIcon>
-            <ListItemText primary="Machine" />
+            <ListItemText primary="Machines" />
           </ListItem>
 
         </List>
