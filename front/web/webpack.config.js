@@ -5,6 +5,11 @@ const basePlugins = require("./webpack/config.plugins.js");
 const externals = require("./webpack/config.externals");
 const devServer = require("./webpack/config.devServer");
 const stats = require("./webpack/config.stats");
+const dotenv = require("dotenv");
+
+const result = dotenv.config({path: ".env"});
+console.log(result.error);
+
 
 module.exports = function webpack(env = {}, argv = {}) {
   const outputPath = path.resolve(APP_ROOT, "dist");

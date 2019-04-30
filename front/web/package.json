@@ -18,6 +18,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^11.10.5",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
@@ -25,6 +26,7 @@
     "@types/react-redux": "^7.0.2",
     "@types/redux-first-router": "^2.1.1",
     "@types/styled-components": "^4.1.12",
+    "dotenv": "^7.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-jss": "^8.6.1",

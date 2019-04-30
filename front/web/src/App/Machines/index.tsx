@@ -1,5 +1,8 @@
 import React from "react"
+import withConnect from "./withConnect";
+interface Props {
+  list: string[]
+}
+const Machines = (props: Props) => <div>{props.list}</div>
 
-const Machines = () => <div>toto</div>
-
-export default Machines
+export default withConnect(Machines)

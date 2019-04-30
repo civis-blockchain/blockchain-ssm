@@ -7,6 +7,7 @@ import {
 } from "redux";
 import { connectRoutes } from "redux-first-router";
 import routes from "./routes";
+import {machinesReducer} from "./reducers/machines";
 import { Page } from "./actions/navigation";
 
 type LocationState = {
@@ -19,6 +20,7 @@ type LocationState = {
 };
 
 export type State = {
+  machines: string[];
   location: LocationState;
 };
 
@@ -27,13 +29,15 @@ const defaultInitialState: State = {
     pathname: "/",
     type: "HOME_PAGE",
     payload: {}
-  }
+  },
+  machines: []
 };
 
 const reduxFirstRouter = connectRoutes(routes);
 
 const reducer = combineReducers({
-  location: reduxFirstRouter.reducer
+  location: reduxFirstRouter.reducer,
+  machines: machinesReducer
 });
 const middlewares = [reduxFirstRouter.middleware];
 
@@ -53,5 +57,11 @@ export const createAppStore = (
   );
 
 export const store = createAppStore();
+
+fetch(`${process.env.COOP_URL}?args=ssm&cmd=query&fcn=list`).then(response => {
+  return response.json();
+}).then(json => {
+  store.dispatch({type: "MACHINE_LIST", payload: {list:json}})
+});
 
 export default store;
