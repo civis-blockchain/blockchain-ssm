@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // @ts-ignore
 import { Network, Node, Edge } from "@lifeomic/react-vis-network";
-import { Machine } from "../../domain/machine";
+import { Machine } from "../../../domain/machine";
+import styled from "styled-components";
 
 interface Props {
   machine: Machine;
@@ -19,9 +20,14 @@ const options = {
     }
   },
   "manipulation": {
-    "enabled": true
+    "enabled": false
   }
 };
+
+const Section = styled.section`
+ height: 350px;
+`;
+
 
 export const MachineGraph = ({ machine }: Props) => {
   let nodes: Node[] = [];
@@ -31,11 +37,11 @@ export const MachineGraph = ({ machine }: Props) => {
   machine.transitions.map(trans => {
     j++;
     nbNodes = Math.max(nbNodes, Math.max(trans.to + 1, trans.from + 1));
-    edges.push(<Edge id={j} from={trans.from} to={trans.to} label={trans.role + ": " + trans.action} arrows="to"/>);
+    edges.push(<Edge key={j} id={j} from={trans.from} to={trans.to} label={trans.role + ": " + trans.action} arrows="to"/>);
   });
 
   for (let i = 0; i < nbNodes; i++) {
-    nodes.push(<Node id={i} label={i.toString()}/>);
+    nodes.push(<Node key={i} id={i} label={i.toString()}/>);
   }
-  return <Network options={options}>{nodes}{edges}</Network>;
+  return <Section><Network key={machine.name} options={options}>{nodes}{edges}</Network></Section>;
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer } from "@material-ui/core";
 import { Machine } from "../../../domain/machine";
-import { MachineCard } from "../../../components/MachineCard";
+import { MachineCard } from "../../../components/Machine/MachineCard";
 import styled, { css } from "styled-components";
 
 export const drawerWidth = "70%";
