@@ -5,25 +5,43 @@ import TableRow from "@material-ui/core/es/TableRow";
 import TableCell from "@material-ui/core/es/TableCell";
 import TableBody from "@material-ui/core/es/TableBody";
 import { Table } from "@material-ui/core";
+import withStyles from "@material-ui/core/es/styles/withStyles";
+
+const SessionCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
 interface Props {
   sessions: Session[];
-  onClick: () => void;
 }
 
-export const SessionList = ({sessions, onClick}: Props) => (
+export const SessionList = ({sessions}: Props) => (
   <Table>
     <TableHead>
       <TableRow>
-        <TableCell>Name</TableCell>
+        <SessionCell>Name</SessionCell>
+        <SessionCell>Current</SessionCell>
+        <SessionCell>Iteration</SessionCell>
       </TableRow>
     </TableHead>
     <TableBody>
       {sessions.map(session => (
-        <TableRow key={session.session} onClick={onClick}>
-          <TableCell component="th" scope="row">
+        <TableRow key={session.session} >
+          <SessionCell component="th" scope="row">
             {session.session}
-          </TableCell>
+          </SessionCell>
+          <SessionCell>
+            {session.current}
+          </SessionCell>
+          <SessionCell>
+            {session.iteration}
+          </SessionCell>
         </TableRow>
       ))}
     </TableBody>
