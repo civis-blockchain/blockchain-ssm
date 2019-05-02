@@ -9,6 +9,8 @@ import { connectRoutes } from "redux-first-router";
 import routes from "./routes";
 import {machinesReducer} from "./reducers/machines";
 import { Page } from "./actions/navigation";
+import { Machine } from "../domain/machine";
+import { fetchMachines } from "./fetchers/coop";
 
 type LocationState = {
   pathname: string;
@@ -20,7 +22,7 @@ type LocationState = {
 };
 
 export type State = {
-  machines: string[];
+  machines: Machine[];
   location: LocationState;
 };
 
@@ -58,10 +60,8 @@ export const createAppStore = (
 
 export const store = createAppStore();
 
-fetch(`${process.env.COOP_URL}?args=ssm&cmd=query&fcn=list`).then(response => {
-  return response.json();
-}).then(json => {
-  store.dispatch({type: "MACHINE_LIST", payload: {list:json}})
+fetchMachines().then(machines => {
+  store.dispatch({type: "MACHINE_LIST", payload: {list:machines}})
 });
 
 export default store;

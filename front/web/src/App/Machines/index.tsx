@@ -10,7 +10,7 @@ import MachineDetails from "./MachineDetails";
 import { Machine } from "../../domain/machine";
 
 interface Props {
-  list: string[]
+  list: Machine[]
 }
 
 interface State {
@@ -28,13 +28,17 @@ class Machines extends React.Component<Props, State> {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
+              <TableCell>Nb Session</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.list.map(machine => (
-              <TableRow key={machine} onClick={this.detailsOpen(machine)}>
+              <TableRow key={machine.name} onClick={this.detailsOpen(machine)}>
                 <TableCell component="th" scope="row">
-                  {machine}
+                  {machine.name}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {machine.sessions.length}
                 </TableCell>
               </TableRow>
             ))}
@@ -49,14 +53,9 @@ class Machines extends React.Component<Props, State> {
     this.setState({ machineSelected: null });
   };
 
-  private detailsOpen = (machine: string) => () => {
+  private detailsOpen = (machine: Machine) => () => {
     this.setState({ machineSelected: null, loading: true });
-    fetch(`${process.env.COOP_URL}?args=${machine}&cmd=query&fcn=ssm`).then(response => {
-      return response.json();
-    }).then((json : Machine) => {
-      this.setState({ machineSelected: json, loading: false });
-    });
-
+    this.setState({ machineSelected: machine, loading: false });
   };
 
 }
