@@ -29,12 +29,26 @@ export class App extends React.PureComponent<Props, State> {
     this.setState({ open: false });
   };
 
+  getTitle = (): string => {
+    if (this.props.page  === "HOME_PAGE") {
+      return "Home";
+    }
+      if (this.props.page  === "AUTOMATON_SESSION_PAGE") {
+          return "Session";
+      }
+      if (this.props.page  === "MACHINES_PAGE") {
+          return "Machine";
+      }
+      return "SSM";
+  };
+
   render() {
     return (
       <UIContainer>
         <AppBar
           drawerOpen={this.state.open}
           onDrawerOpen={this.handleDrawerOpen}
+          title={this.getTitle()}
         />
         <Drawer open={this.state.open} onClose={this.handleDrawerClose} />
         <Main>

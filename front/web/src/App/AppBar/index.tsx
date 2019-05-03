@@ -28,10 +28,11 @@ const MenuButton = styled(IconButton)`
 `;
 
 interface Props {
+  title: string;
   drawerOpen: boolean;
   onDrawerOpen: () => void;
 }
-export const AppBar = ({ drawerOpen, onDrawerOpen }: Props) => (
+export const AppBar = ({ drawerOpen, onDrawerOpen, title }: Props) => (
   <Wrapper>
     <Toolbar disableGutters={!drawerOpen}>
       {drawerOpen && (
@@ -43,7 +44,7 @@ export const AppBar = ({ drawerOpen, onDrawerOpen }: Props) => (
           <MenuIcon />
         </MenuButton>
       )}
-      <H1>Civis Blockchain SSM</H1>
+      <H1>{title}</H1>
       <IconButton color="inherit">
         <Badge badgeContent={4} color="secondary">
           <NotificationsIcon />
