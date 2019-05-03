@@ -14,6 +14,7 @@ import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 // @ts-ignore
 import Logo from "../../../public/logo-ssm-light.png";
+import {backgroundColor, textColor} from "../theme";
 
 export const drawerWidth = 240;
 
@@ -63,30 +64,6 @@ const DrawerSpacer = withTheme()(styled.div`
   }
 `);
 
-export const backgroundColor = "#1e3c4a";
-export const textColor = "#d4e7ef";
-
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    text: {
-      primary: textColor,
-    }
-  },
-  overrides: {
-    MuiDrawer: {
-      paper: {
-        background: backgroundColor
-      }
-    },
-    MuiListItemIcon: {
-      root :{
-        color: textColor
-      }
-    }
-  }
-});
-
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -101,7 +78,6 @@ export const Drawer = ({
   goToAutomatonSession,
   goToMachines
 }: Props) => (
-  <MuiThemeProvider theme={theme}>
   <Nav>
     <Wrapper open={open || undefined}>
       <div>
@@ -119,10 +95,6 @@ export const Drawer = ({
             <ListItemIcon><InboxIcon /></ListItemIcon>
             <ListItemText primary="Machines" />
           </ListItem>
-
-        </List>
-        <Divider />
-        <List>
           <ListItem button onClick={() => goToAutomatonSession("a", "s")}>
             <ListItemIcon>
               <InboxIcon />
@@ -133,7 +105,6 @@ export const Drawer = ({
       </div>
     </Wrapper>
   </Nav>
-  </MuiThemeProvider>
 );
 
 export default withConnect(Drawer);

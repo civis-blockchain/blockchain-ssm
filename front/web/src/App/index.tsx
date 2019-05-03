@@ -8,6 +8,9 @@ import { Page } from "store/actions/navigation";
 import Home from "./Home";
 import AutomatonSessionForm from "./AutomatonSessionForm";
 import Machines from "./Machines";
+import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
+import {backgroundColor, backgroundColorSecondary, notificationColor, textColor, themeSsm} from "./theme";
+import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 
 interface Props {
   page: Page;
@@ -45,6 +48,7 @@ export class App extends React.PureComponent<Props, State> {
   render() {
     return (
       <UIContainer>
+        <MuiThemeProvider theme={themeSsm}>
         <AppBar
           drawerOpen={this.state.open}
           onDrawerOpen={this.handleDrawerOpen}
@@ -60,6 +64,7 @@ export class App extends React.PureComponent<Props, State> {
             <Machines />
           )}
         </Main>
+        </MuiThemeProvider>
       </UIContainer>
     );
   }

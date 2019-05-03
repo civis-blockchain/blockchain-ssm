@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MuiAppBar from "@material-ui/core/AppBar";
-import { drawerWidth } from "../Drawer";
+import {drawerWidth} from "../Drawer";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -33,25 +33,25 @@ interface Props {
   onDrawerOpen: () => void;
 }
 export const AppBar = ({ drawerOpen, onDrawerOpen, title }: Props) => (
-  <Wrapper>
-    <Toolbar disableGutters={!drawerOpen}>
-      {drawerOpen && (
-        <MenuButton
-          color="inherit"
-          aria-label="Open drawer"
-          onClick={onDrawerOpen}
-        >
-          <MenuIcon />
-        </MenuButton>
-      )}
-      <H1>{title}</H1>
-      <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-    </Toolbar>
-  </Wrapper>
+    <Wrapper>
+        <Toolbar disableGutters={!drawerOpen}>
+          {drawerOpen && (
+            <MenuButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={onDrawerOpen}
+            >
+              <MenuIcon />
+            </MenuButton>
+          )}
+          <H1>{title}</H1>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+    </Wrapper>
 );
 
 export default AppBar;
