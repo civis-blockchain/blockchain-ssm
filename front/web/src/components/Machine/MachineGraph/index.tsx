@@ -21,6 +21,9 @@ const options = {
   },
   "manipulation": {
     "enabled": false
+  },
+  "interaction": {
+    "zoomView":false
   }
 };
 
