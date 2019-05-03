@@ -10,6 +10,11 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import { withTheme } from "@material-ui/core/styles";
 import withConnect from "./withConnect";
 
+import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
+import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
+// @ts-ignore
+import Logo from "../../../public/logo-ssm-light.png";
+
 export const drawerWidth = 240;
 
 // TODO set variant to 'temporary' on mobile
@@ -49,7 +54,38 @@ const Nav = styled.nav`
 
 const DrawerSpacer = withTheme()(styled.div`
   ${({ theme }) => theme.mixins.toolbar}
+  display: flex;
+  justify-content: center;
+  & img {
+     width: 150px;
+     height: 55px;
+     margin-top: 5px;
+  }
 `);
+
+export const backgroundColor = "#1e3c4a";
+export const textColor = "#d4e7ef";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    text: {
+      primary: textColor,
+    }
+  },
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        background: backgroundColor
+      }
+    },
+    MuiListItemIcon: {
+      root :{
+        color: textColor
+      }
+    }
+  }
+});
 
 interface Props {
   open: boolean;
@@ -65,10 +101,11 @@ export const Drawer = ({
   goToAutomatonSession,
   goToMachines
 }: Props) => (
+  <MuiThemeProvider theme={theme}>
   <Nav>
     <Wrapper open={open || undefined}>
       <div>
-        <DrawerSpacer />
+        <DrawerSpacer><img src={Logo} alt="Logo" /></DrawerSpacer>
         <Divider />
         <List>
           <ListItem button onClick={goToHome}>
@@ -96,6 +133,7 @@ export const Drawer = ({
       </div>
     </Wrapper>
   </Nav>
+  </MuiThemeProvider>
 );
 
 export default withConnect(Drawer);

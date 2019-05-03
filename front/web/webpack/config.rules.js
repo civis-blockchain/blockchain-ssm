@@ -18,5 +18,9 @@ module.exports = [
   {
     test: /\.woff2?$/,
     loader: "url-loader"
+  },
+  {
+    test: /\.(png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader: 'file-loader'
   }
 ];
