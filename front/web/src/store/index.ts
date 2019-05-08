@@ -8,7 +8,7 @@ import {
 import { connectRoutes } from "redux-first-router";
 import routes from "./routes";
 import {machinesReducer} from "./reducers/machines";
-import { Page } from "./actions/navigation";
+import {Page} from "./actions/navigation";
 import { Machine } from "../domain/machine";
 import { fetchMachines } from "./fetchers/coop";
 
@@ -16,6 +16,7 @@ type LocationState = {
   pathname: string;
   type: Page;
   payload: {
+    machineId?: string,
     automatonId?: string;
     sessionId?: string;
   };
@@ -30,7 +31,7 @@ const defaultInitialState: State = {
   location: {
     pathname: "/",
     type: "HOME_PAGE",
-    payload: {}
+    payload: {},
   },
   machines: []
 };

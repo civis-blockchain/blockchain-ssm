@@ -9,6 +9,10 @@ export const textColor = "#d4e7ef";
 
 export const notificationColor = "#FFAB40";
 
+export const drawerWidth = 240;
+
+export const detailsWidth = "70%";
+
 export const themeSsm = createMuiTheme({
     palette: {
         type: "light",

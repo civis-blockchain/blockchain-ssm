@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import MuiDrawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,13 +9,9 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import { withTheme } from "@material-ui/core/styles";
 import withConnect from "./withConnect";
 
-import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 // @ts-ignore
 import Logo from "../../../public/logo-ssm-light.png";
-import {backgroundColor, textColor} from "../theme";
-
-export const drawerWidth = 240;
+import {drawerWidth} from "../theme";
 
 // TODO set variant to 'temporary' on mobile
 // TODO force OPEN to true on desktop only
@@ -25,7 +20,7 @@ export const drawerWidth = 240;
 interface WrapperProps {
   open: true | undefined;
 }
-export const Wrapper = styled(MuiDrawer).attrs(({ theme }) => ({
+const Wrapper = styled(MuiDrawer).attrs(({ theme }) => ({
   variant: "permanent",
   open: true,
   anchor: theme.direction === "rtl" ? "right" : "left",
@@ -71,9 +66,9 @@ interface Props {
   goToMachines: () => void;
   goToAutomatonSession: (automatonId: string, sessionId: string) => void;
 }
-export const Drawer = ({
+
+const Drawer = ({
   open,
-  onClose,
   goToHome,
   goToAutomatonSession,
   goToMachines
@@ -82,7 +77,6 @@ export const Drawer = ({
     <Wrapper open={open || undefined}>
       <div>
         <DrawerSpacer><img src={Logo} alt="Logo" /></DrawerSpacer>
-        <Divider />
         <List>
           <ListItem button onClick={goToHome}>
             <ListItemIcon>

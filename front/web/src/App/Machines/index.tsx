@@ -6,11 +6,11 @@ import TableRow from "@material-ui/core/es/TableRow";
 import TableCell from "@material-ui/core/es/TableCell";
 import TableBody from "@material-ui/core/es/TableBody";
 import Paper from "@material-ui/core/es/Paper";
-import MachineDetails from "./MachineDetails";
 import { Machine } from "../../domain/machine";
 
 interface Props {
-  list: Machine[]
+  list: Machine[],
+  goToMachine: (machine: Machine) => void;
 }
 
 interface State {
@@ -45,17 +45,11 @@ class Machines extends React.Component<Props, State> {
           </TableBody>
         </Table>
       </Paper>
-      <MachineDetails loading={this.state.loading} machine={this.state.machineSelected} onClose={this.detailsClose}/>
     </React.Fragment>;
   }
 
-  detailsClose = () => {
-    this.setState({ machineSelected: null });
-  };
-
   private detailsOpen = (machine: Machine) => () => {
-    this.setState({ machineSelected: null, loading: true });
-    this.setState({ machineSelected: machine, loading: false });
+    this.props.goToMachine(machine);
   };
 
 }

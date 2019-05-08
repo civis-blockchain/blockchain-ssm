@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import MuiAppBar from "@material-ui/core/AppBar";
-import {drawerWidth} from "../Drawer";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "./Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import H1 from "../../components/H1";
+import {drawerWidth} from "../theme";
 
 export const Wrapper = styled(MuiAppBar).attrs(() => ({
   position: "fixed"
