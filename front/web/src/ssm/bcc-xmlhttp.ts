@@ -37,10 +37,10 @@ export const bccHostCmd = function (uri: string, cmd: string, fcn: string, args:
 		xmlhttp.send(JSON.stringify(json));
 	} else {
 		let query = "cmd=" + encodeURIComponent(cmd) + "&fcn=" + encodeURIComponent(fcn);
+		// @ts-ignore
 		args.map(function(arg: string) {query += "&args=" + encodeURIComponent(arg);});
 		xmlhttp.open("GET", uri + "?" + query, true);
 		xmlhttp.send();
 	}
-
 	return cbctx;
 };

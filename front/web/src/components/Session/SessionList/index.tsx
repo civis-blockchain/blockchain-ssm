@@ -19,9 +19,10 @@ const SessionCell = withStyles(theme => ({
 
 interface Props {
   sessions: Session[];
+  onSessionClick: (machineId: string, sessionId: string) => {};
 }
 
-export const SessionList = ({sessions}: Props) => (
+export const SessionList = ({sessions, onSessionClick}: Props) => (
   <Table>
     <TableHead>
       <TableRow>
@@ -32,7 +33,7 @@ export const SessionList = ({sessions}: Props) => (
     </TableHead>
     <TableBody>
       {sessions.map(session => (
-        <TableRow key={session.session} >
+        <TableRow key={session.session} onClick={() => {onSessionClick(session.ssm, session.session)}}>
           <SessionCell component="th" scope="row">
             {session.session}
           </SessionCell>

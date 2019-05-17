@@ -8,20 +8,35 @@ import {Page} from "store/actions/navigation";
 import Home from "./Home";
 import AutomatonSessionForm from "./AutomatonSessionForm";
 import Machines from "./Machines";
-import {themeSsm} from "./theme";
+import {detailsWidth, themeSsm} from "./theme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
-import ObjectDetails from "./Details/MachineDetails";
+import MachineDetails from "./Details/MachineDetails";
 import {Machine} from "../domain/machine";
+import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
+import {Session} from "../domain/session";
+import SessionDetails from "./Details/SessionDetails";
 
 interface Props {
   page: Page;
   machine: Machine | null;
+  session: Session | null;
   goToMachines: () => {};
 }
 
 interface State {
   open: boolean;
 }
+
+const detailsTheme = createMuiTheme({
+    overrides: {
+        MuiDrawer: {
+            paper: {
+                background: "white",
+                width: detailsWidth
+            }
+        }
+    }
+});
 
 export class App extends React.PureComponent<Props, State> {
   state = {
@@ -64,13 +79,16 @@ export class App extends React.PureComponent<Props, State> {
           {this.props.page === "AUTOMATON_SESSION_PAGE" && (
             <AutomatonSessionForm />
           )}
-          {(this.props.page === "MACHINES_PAGE" || this.props.page === "MACHINE_PAGE") && (
+          {(this.props.page === "MACHINES_PAGE" || this.props.page === "MACHINE_PAGE" || this.props.page === "SESSION_PAGE") && (
             <Machines />
           )}
         </Main>
             {(this.props.machine !== null && this.props.machine !== undefined)
-                    && <ObjectDetails machine={this.props.machine} goTo={this.props.goToMachines}/>
-        }
+                && <MachineDetails theme={detailsTheme} machine={this.props.machine} goTo={this.props.goToMachines}/>
+            }
+            {(this.props.session !== null && this.props.session !== undefined)
+                && <SessionDetails theme={detailsTheme} session={this.props.session} goTo={this.props.goToMachines}/>
+            }
 
         </MuiThemeProvider>
       </UIContainer>
