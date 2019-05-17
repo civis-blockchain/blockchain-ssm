@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/es/TableCell";
 import TableBody from "@material-ui/core/es/TableBody";
 import Paper from "@material-ui/core/es/Paper";
 import { Machine } from "../../domain/machine";
+import {MachineList} from "../../components/Machine/MachineList";
 
 interface Props {
   list: Machine[],
@@ -24,26 +25,7 @@ class Machines extends React.Component<Props, State> {
   render() {
     return <React.Fragment>
       <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Nb Session</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.list.map(machine => (
-              <TableRow key={machine.name} onClick={this.detailsOpen(machine)}>
-                <TableCell component="th" scope="row">
-                  {machine.name}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {machine.sessions.length}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <MachineList list={this.props.list} onMachineClick={this.props.goToMachine}/>
       </Paper>
     </React.Fragment>;
   }
