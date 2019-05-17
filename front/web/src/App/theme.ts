@@ -50,7 +50,24 @@ export const themeSsm = createMuiTheme({
         },
         MuiTableCell: {
             body: {
-                color:"black"
+                color:"black",
+
+            }
+        },
+        MuiTableSortLabel: {
+            root: {
+                "&:hover": {
+                    color: "black"
+                }
+            },
+            active: {
+                color: "black",
+                "&:hover": {
+                    color: "black"
+                },
+                "&:focus": {
+                    color: "black"
+                }
             }
         }
     }

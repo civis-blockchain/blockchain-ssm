@@ -1,13 +1,8 @@
 import React from "react";
 import withConnect from "./withConnect";
-import { Table } from "@material-ui/core";
-import TableHead from "@material-ui/core/es/TableHead";
-import TableRow from "@material-ui/core/es/TableRow";
-import TableCell from "@material-ui/core/es/TableCell";
-import TableBody from "@material-ui/core/es/TableBody";
 import Paper from "@material-ui/core/es/Paper";
 import { Machine } from "../../domain/machine";
-import {MachineList} from "../../components/Machine/MachineList";
+import MachineList from "../../components/Machine/MachineList";
 
 interface Props {
   list: Machine[],
