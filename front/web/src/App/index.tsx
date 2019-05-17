@@ -83,11 +83,11 @@ export class App extends React.PureComponent<Props, State> {
             <Machines />
           )}
         </Main>
-            {(this.props.machine !== null && this.props.machine !== undefined)
+            {(this.props.machine !== null)
                 && <MachineDetails theme={detailsTheme} machine={this.props.machine} goTo={this.props.goToMachines}/>
             }
-            {(this.props.session !== null && this.props.session !== undefined)
-                && <SessionDetails theme={detailsTheme} session={this.props.session} goTo={this.props.goToMachines}/>
+            {(this.props.machine !== null && this.props.session !== null )
+                && <SessionDetails theme={detailsTheme} machine={this.props.machine} session={this.props.session} goTo={this.props.goToMachines}/>
             }
 
         </MuiThemeProvider>

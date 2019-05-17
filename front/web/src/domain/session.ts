@@ -31,3 +31,8 @@ export interface Origin {
   role: string
   action: string
 }
+
+export interface SessionLog {
+  txId: string
+  state: Session
+}

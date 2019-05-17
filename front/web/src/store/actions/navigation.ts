@@ -28,6 +28,7 @@ export const goToMachine = (machine: Machine): NavigationAction => ({
 export const goToSession = (machineId: string, sessionId: string): NavigationAction => ({
   type: "SESSION_PAGE",
   payload: {
+    machineId: machineId,
     sessionId: sessionId
   }
 });

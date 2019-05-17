@@ -27,7 +27,6 @@ const getSession = (state: State) : Session | null => {
   return session !== undefined ? session : null;
 };
 
-
 const mapDispatchToProps = {
   goToMachines
 };

@@ -1,5 +1,5 @@
 import { Machine } from "../../domain/machine";
-import { Session } from "../../domain/session";
+import {Session, SessionLog} from "../../domain/session";
 
 export const fetchMachines = async () : Promise<Machine[]> => {
   const sessions = await fetchSessions();
@@ -10,11 +10,11 @@ export const fetchMachines = async () : Promise<Machine[]> => {
 
 export  const fetchMachine = async (machineName: string, sessions: Session[]) : Promise<Machine> => {
   const machine :Machine = await fetchCoop( "query", "ssm", machineName);
-  machine.sessions = sessions.filter(session => iFromMachine(session, machine));
+  machine.sessions = sessions.filter(session => ifFromMachine(session, machine));
   return machine;
 };
 
-export  const iFromMachine = (session: Session, machine: Machine) =>  {
+export  const ifFromMachine = (session: Session, machine: Machine) =>  {
   return (session.ssm === machine.name);
 };
 
@@ -25,6 +25,10 @@ export  const fetchSessions = async () : Promise<Session[]> => {
 
 export  const fetchSession = async (session: string) : Promise<Session> => {
   return fetchCoop("query", "session", session);
+};
+
+export  const fetchSessionLogs = async (session: string) : Promise<SessionLog[]> => {
+  return fetchCoop("query", "log", session);
 };
 
 export  const fetchCoop = async ( cmd: String, fcn: String, args: String) : Promise<any> => {
