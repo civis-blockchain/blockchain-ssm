@@ -10,9 +10,11 @@ import routes from "./routes";
 import {machinesReducer} from "./reducers/machines";
 import {Page} from "./actions/navigation";
 import { Machine } from "../domain/machine";
-import {fetchMachines, fetchSessions} from "./fetchers/coop";
+import {fetchMachines, fetchSessions, fetchUsers} from "./fetchers/coop";
 import {Session} from "../domain/session";
 import {sessionsReducer} from "./reducers/sessions";
+import {User} from "../domain/user";
+import {usersReducer} from "./reducers/users";
 
 type LocationState = {
   pathname: string;
@@ -25,6 +27,7 @@ type LocationState = {
 };
 
 export type State = {
+  users: User[];
   machines: Machine[];
   sessions: Session[];
   location: LocationState;
@@ -36,6 +39,7 @@ const defaultInitialState: State = {
     type: "HOME_PAGE",
     payload: {},
   },
+  users: [],
   machines: [],
   sessions: []
 };
@@ -45,7 +49,8 @@ const reduxFirstRouter = connectRoutes(routes);
 const reducer = combineReducers({
   location: reduxFirstRouter.reducer,
   machines: machinesReducer,
-  sessions: sessionsReducer
+  sessions: sessionsReducer,
+  users: usersReducer
 });
 const middlewares = [reduxFirstRouter.middleware];
 
@@ -72,6 +77,10 @@ fetchMachines().then(machines => {
 
 fetchSessions().then(sessions => {
   store.dispatch({type: "SESSION_LIST", payload: {list:sessions}})
+});
+
+fetchUsers().then(users => {
+  store.dispatch({type: "USER_LIST", payload: {list:users}})
 });
 
 export default store;

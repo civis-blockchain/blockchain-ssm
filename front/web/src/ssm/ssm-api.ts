@@ -1,11 +1,11 @@
-import {PublicUser} from "../domain/user";
+import {User} from "../domain/user";
 
 const CryptoJS = require("crypto-js");
 const JSEncrypt = require("jsencrypt");
 
 const JSE = new JSEncrypt({default_key_size: 2048});
 
-export const ssmRegister = (user: PublicUser, admin: string, adminKey: string) => {
+export const ssmRegister = (user: User, admin: string, adminKey: string) => {
 	JSE.setPrivateKey(adminKey);
 	const userStr = JSON.stringify(user);
 	const signStr = JSE.sign(userStr, CryptoJS.SHA256, "sha256");

@@ -1,4 +1,4 @@
-export interface PublicUser {
+export interface User {
     name: string
     pub: string
 }

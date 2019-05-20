@@ -15,6 +15,7 @@ import {Machine} from "../domain/machine";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import {Session} from "../domain/session";
 import SessionDetails from "./Details/SessionDetails";
+import Users from "./Users";
 
 interface Props {
   page: Page;
@@ -61,6 +62,9 @@ export class App extends React.PureComponent<Props, State> {
       if (this.props.page  === "MACHINES_PAGE") {
           return "Machine";
       }
+      if (this.props.page  === "USERS_PAGE") {
+          return "User";
+      }
       return "SSM";
   };
 
@@ -82,6 +86,9 @@ export class App extends React.PureComponent<Props, State> {
           {(this.props.page === "MACHINES_PAGE" || this.props.page === "MACHINE_PAGE" || this.props.page === "SESSION_PAGE") && (
             <Machines />
           )}
+            {(this.props.page === "USERS_PAGE") && (
+                <Users />
+            )}
         </Main>
             {(this.props.machine !== null)
                 && <MachineDetails theme={detailsTheme} machine={this.props.machine} goTo={this.props.goToMachines}/>

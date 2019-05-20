@@ -1,6 +1,6 @@
 import {ssmCreate, ssmPerform, ssmRegister, ssmStart} from "./ssm-api";
 import {bccHostCmd} from "./bcc-xmlhttp";
-import {PublicUser} from "../domain/user";
+import {User} from "../domain/user";
 
 function hostCmdSetup({uri, cmd, fcn, args, onOk, onError}: { uri: any, cmd: any, fcn: any, args: any, onOk: any, onError: any }) {
 	const cbctx = bccHostCmd(uri, cmd, fcn, args, onOk, onError);
@@ -9,7 +9,7 @@ function hostCmdSetup({uri, cmd, fcn, args, onOk, onError}: { uri: any, cmd: any
 
 function ssmRegisterSetup(onOk: ()=> void, onError: ()=> void) {
 	const uri = "";
-	const user: PublicUser = {
+	const user: User = {
 		name: "",
 		pub: ""
 	}

@@ -1,5 +1,6 @@
 import { Machine } from "../../domain/machine";
 import {Session, SessionLog} from "../../domain/session";
+import {User} from "../../domain/user";
 
 export const fetchMachines = async () : Promise<Machine[]> => {
   const sessions = await fetchSessions();
@@ -34,4 +35,13 @@ export  const fetchSessionLogs = async (session: string) : Promise<SessionLog[]>
 export  const fetchCoop = async ( cmd: String, fcn: String, args: String) : Promise<any> => {
   const response = await fetch(`${process.env.COOP_URL}?args=${args}&cmd=${cmd}&fcn=${fcn}`);
   return response.json();
+};
+
+export const fetchUsers = async () : Promise<User[]> => {
+  const json :string[] = await fetchCoop("query", "list", "user");
+  return Promise.all(json.map(fetchUser))
+};
+
+export  const fetchUser = async (userName: string) : Promise<User> => {
+  return fetchCoop("query", "user", userName);
 };

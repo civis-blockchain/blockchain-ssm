@@ -64,6 +64,7 @@ interface Props {
   onClose: () => void;
   goToHome: () => void;
   goToMachines: () => void;
+  goToUsers: () => void;
   goToAutomatonSession: (automatonId: string, sessionId: string) => void;
 }
 
@@ -71,7 +72,8 @@ const Drawer = ({
   open,
   goToHome,
   goToAutomatonSession,
-  goToMachines
+  goToMachines,
+  goToUsers
 }: Props) => (
   <Nav>
     <Wrapper open={open || undefined}>
@@ -89,6 +91,12 @@ const Drawer = ({
             <ListItemIcon><InboxIcon /></ListItemIcon>
             <ListItemText primary="Machines" />
           </ListItem>
+
+          <ListItem button onClick={goToUsers}>
+            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemText primary="User" />
+          </ListItem>
+
           <ListItem button onClick={() => goToAutomatonSession("a", "s")}>
             <ListItemIcon>
               <InboxIcon />

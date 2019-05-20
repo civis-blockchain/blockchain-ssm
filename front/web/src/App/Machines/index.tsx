@@ -28,7 +28,6 @@ class Machines extends React.Component<Props, State> {
   private detailsOpen = (machine: Machine) => () => {
     this.props.goToMachine(machine);
   };
-
 }
 
 export default withConnect(Machines);
