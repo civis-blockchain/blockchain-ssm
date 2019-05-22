@@ -8,6 +8,7 @@ import {Session, SessionLog} from "../../../domain/session";
 import {MachineGraph} from "../../Machine/MachineGraph";
 import {Machine} from "../../../domain/machine";
 import {SessionLogs} from "../SessionLogs";
+import Link from "@material-ui/core/es/Link";
 
 const styles = ({ spacing, mixins }: Theme) => createStyles({
   root: {
@@ -29,7 +30,12 @@ export const SessionCard = withStyles(styles) (({session, logs, machine, classes
   <div>
     <Paper className={classes.root} elevation={1}>
       <Typography variant="h5" component="h3">{session.session}</Typography>
-      <Typography variant="h6" component="h4" onClick={() => {onMachineClick(machine)}}>{session.ssm}</Typography>
+      <Link
+          component="button"
+          variant="body2"
+          onClick={() => {onMachineClick(machine)}}>
+        {session.ssm}
+      </Link>
       <MachineGraph machine={machine}/>
       {logs !== null && <SessionLogs logs={logs}/>}
     </Paper>
