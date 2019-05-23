@@ -1,12 +1,12 @@
 import {User} from "../domain/user";
 
 const CryptoJS = require("crypto-js");
-const JSEncrypt = require("jsencrypt");
-
-const JSE = new JSEncrypt({default_key_size: 2048});
+const {JSEncrypt} = require("jsencrypt");
 
 export const ssmRegister = (user: User, admin: string, adminKey: string) => {
+	const JSE = new JSEncrypt({default_key_size: 2048});
 	JSE.setPrivateKey(adminKey);
+	user.pub = flattenPublicKey(user.pub);
 	const userStr = JSON.stringify(user);
 	const signStr = JSE.sign(userStr, CryptoJS.SHA256, "sha256");
 	const hostCmd = {
@@ -19,6 +19,7 @@ export const ssmRegister = (user: User, admin: string, adminKey: string) => {
 };
 
 export const ssmCreate = (ssm: string, admin: string, adminKey: string ) => {
+	const JSE = new JSEncrypt({default_key_size: 2048});
 	JSE.setPrivateKey(adminKey);
 	const ssmStr = JSON.stringify(ssm);
 	const signStr = JSE.sign(ssmStr, CryptoJS.SHA256, "sha256");
@@ -32,6 +33,7 @@ export const ssmCreate = (ssm: string, admin: string, adminKey: string ) => {
 };
 
 export const ssmStart = (session: string, admin: string, adminKey: string) => {
+	const JSE = new JSEncrypt({default_key_size: 2048});
 	JSE.setPrivateKey(adminKey);
 	const sessionStr = JSON.stringify(session);
 	const signStr = JSE.sign(sessionStr, CryptoJS.SHA256, "sha256");
@@ -45,6 +47,7 @@ export const ssmStart = (session: string, admin: string, adminKey: string) => {
 };
 
 export const ssmPerform = (action: string, context: string, user: string, userPrivateKey: string) => {
+	const JSE = new JSEncrypt({default_key_size: 2048});
 	JSE.setPrivateKey(userPrivateKey);
 	const contextStr = JSON.stringify(context);
 	const signStr = JSE.sign(action + contextStr, CryptoJS.SHA256, "sha256");

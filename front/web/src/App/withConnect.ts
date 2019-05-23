@@ -2,7 +2,7 @@ import { getPage } from "../store/selectors/navigation";
 import { connect } from "react-redux";
 import { State } from "../store";
 import {Machine} from "../domain/machine";
-import {goToMachines} from "../store/actions/navigation";
+import {goToMachines, goToUsers} from "../store/actions/navigation";
 import {Session} from "../domain/session";
 
 const mapStateToProps = (state: State) => ({
@@ -28,7 +28,8 @@ const getSession = (state: State) : Session | null => {
 };
 
 const mapDispatchToProps = {
-  goToMachines
+  goToMachines,
+  goToUsers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps);

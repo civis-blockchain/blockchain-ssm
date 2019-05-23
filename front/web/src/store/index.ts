@@ -5,12 +5,12 @@ import {
   compose,
   Store
 } from "redux";
-import { connectRoutes } from "redux-first-router";
+import {connectRoutes, NavigationAction} from "redux-first-router";
 import routes from "./routes";
 import {machinesReducer} from "./reducers/machines";
 import {Page} from "./actions/navigation";
 import { Machine } from "../domain/machine";
-import {fetchMachines, fetchSessions, fetchUsers} from "./fetchers/coop";
+import {createUser, fetchMachines, fetchSessions, fetchUsers} from "../ssm/ssm-requester";
 import {Session} from "../domain/session";
 import {sessionsReducer} from "./reducers/sessions";
 import {User} from "../domain/user";
@@ -82,5 +82,14 @@ fetchSessions().then(sessions => {
 fetchUsers().then(users => {
   store.dispatch({type: "USER_LIST", payload: {list:users}})
 });
+
+// TODO This is propably not the good way to do it, It will be faster to work with Jalil on it ;)
+export const onCreateUser = (user: User): NavigationAction => {
+  createUser(user).then( message =>{
+    store.dispatch({type: "USER_ADD", payload: {obj:user, msg: message}})
+  });
+  return {type: "USERS_PAGE"};
+};
+
 
 export default store;

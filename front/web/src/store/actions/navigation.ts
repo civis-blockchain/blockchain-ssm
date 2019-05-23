@@ -1,6 +1,8 @@
 import {Machine} from "../../domain/machine";
 
-export type Page = "HOME_PAGE" | "AUTOMATON_SESSION_PAGE" | "MACHINES_PAGE" | "MACHINE_PAGE" | "SESSION_PAGE" | "USERS_PAGE" ;
+export type Page = "HOME_PAGE" | "AUTOMATON_SESSION_PAGE" |
+    "MACHINES_PAGE" | "MACHINE_PAGE" | "SESSION_PAGE" |
+    "USERS_PAGE" | "USER_ADD_PAGE" ;
 
 interface NavigationAction {
   type: Page;
@@ -37,6 +39,16 @@ export const goToSession = (machineId: string, sessionId: string): NavigationAct
     sessionId: sessionId
   }
 });
+
+export const goToUserAdd = (): NavigationAction => ({
+  type: "USER_ADD_PAGE"
+});
+
+
+export const onUserSave = (): NavigationAction => ({
+  type: "USER_ADD_PAGE"
+});
+
 
 export const goToAutomatonSession = (
   automatonId: string,

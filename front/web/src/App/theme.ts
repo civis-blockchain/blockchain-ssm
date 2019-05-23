@@ -1,4 +1,6 @@
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
+import styled from "styled-components";
+import {Drawer} from "@material-ui/core";
 
 export const backgroundColor = "#1e3c4a";
 export const backgroundColorSecondary = "#607d8b";
@@ -72,3 +74,13 @@ export const themeSsm = createMuiTheme({
         }
     }
 });
+
+export const DrawerDetails = styled(Drawer).attrs(({ theme }) => ({
+    classes: { paper: "paper" }
+}))`
+  width: ${detailsWidth};
+
+  & .paper {
+    width: ${detailsWidth};
+  }
+`;

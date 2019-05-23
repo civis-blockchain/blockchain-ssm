@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import styled from "styled-components";
 import { Machine } from "../../../domain/machine";
 import { MachineGraph } from "../MachineGraph";
 import { SessionList } from "../../Session/SessionList";

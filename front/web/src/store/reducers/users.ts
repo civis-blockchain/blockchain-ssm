@@ -5,5 +5,10 @@ export const usersReducer = (state: string[] = [], action: Action): string[] => 
     // @ts-ignore
     return action.payload.list;
   }
+  if(action.type === "USER_ADD") {
+    // @ts-ignore
+    state.push(action.payload.obj);
+    return state;
+  }
   return state;
 };

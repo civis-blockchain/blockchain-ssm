@@ -2,7 +2,7 @@
  * example XMLHttpRequest client for the bcc-rest server
  */
 
-export const bccHostCmd = function (uri: string, cmd: string, fcn: string, args: string, onOk: (value: string) => void, onError:  (value: string) => void) {
+export const bccHostCmd = function (uri: string, cmd: string, fcn: string, args: string[], onOk: (value: string) => void, onError:  (value: string) => void) {
 
 	const cbctx = {
 		onOk: onOk,

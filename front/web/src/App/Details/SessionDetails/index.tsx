@@ -7,7 +7,7 @@ import {SessionCard} from "../../../components/Session/SessionCard";
 import {detailsWidth} from "../../theme";
 import {Session, SessionLog} from "../../../domain/session";
 import {Machine} from "../../../domain/machine";
-import {fetchSessionLogs} from "../../../store/fetchers/coop";
+import {fetchSessionLogs} from "../../../ssm/ssm-requester";
 import withConnect from "./withConnect";
 
 export const DrawerDetails = styled(Drawer).attrs(({ theme }) => ({

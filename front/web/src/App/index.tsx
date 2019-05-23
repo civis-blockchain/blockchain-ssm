@@ -16,12 +16,14 @@ import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import {Session} from "../domain/session";
 import SessionDetails from "./Details/SessionDetails";
 import Users from "./Users";
+import UserAddDetails from "./Users/UserAddDetails";
 
 interface Props {
   page: Page;
   machine: Machine | null;
   session: Session | null;
   goToMachines: () => {};
+  goToUsers: () => {};
 }
 
 interface State {
@@ -86,7 +88,7 @@ export class App extends React.PureComponent<Props, State> {
           {(this.props.page === "MACHINES_PAGE" || this.props.page === "MACHINE_PAGE" || this.props.page === "SESSION_PAGE") && (
             <Machines />
           )}
-            {(this.props.page === "USERS_PAGE") && (
+            {(this.props.page === "USERS_PAGE" || this.props.page === "USER_ADD_PAGE") && (
                 <Users />
             )}
         </Main>
@@ -95,6 +97,9 @@ export class App extends React.PureComponent<Props, State> {
             }
             {(this.props.machine !== null && this.props.session !== null )
                 && <SessionDetails theme={detailsTheme} machine={this.props.machine} session={this.props.session} goTo={this.props.goToMachines}/>
+            }
+            {(this.props.page === "USER_ADD_PAGE")
+            && <UserAddDetails theme={detailsTheme} goTo={this.props.goToUsers}  />
             }
 
         </MuiThemeProvider>
