@@ -1,0 +1,54 @@
+image: civisblockchain/builder-ci:0.1.0-local-0
+
+stages:
+  - build
+  - test
+  - version
+  - package
+  - push
+
+version:
+  stage: version
+  image: civisblockchain/semantic-versioning:latest
+  script:
+    - make -f /opt/io.smart-b/semantic-versioning/Makefile debug_version
+    - make -f /opt/io.smart-b/semantic-versioning/Makefile next_version >> version.build
+  artifacts:
+    paths:
+      - version*
+
+package:
+  stage: package
+  before_script:
+    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
+    - echo $CONTAINER_NAME
+    - docker-compose -f docker-compose-it.yaml up -d
+    - docker network connect bclannet-it $CONTAINER_NAME
+  after_script:
+    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
+    - docker network disconnect bclannet-it $CONTAINER_NAME
+    - docker-compose -f docker-compose-it.yaml down
+  script:
+    - export VERSION_BUILD=$(cat version.build)
+    - echo $VERSION_BUILD
+    - make package -e VERSION=${VERSION_BUILD}
+
+push:
+  stage: push
+  image: civisblockchain/builder-ci
+  when: manual
+  before_script:
+    -  echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin
+  script:
+    - export VERSION_BUILD=$(cat version.build)
+    - make push -e VERSION=${VERSION_BUILD}
+
+push-latest:
+  stage: push
+  image: civisblockchain/builder-ci
+  when: manual
+  before_script:
+    -  echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin
+  script:
+    - export VERSION_BUILD=$(cat version.build)
+    - make push-latest -e VERSION=${VERSION_BUILD}
