@@ -2,10 +2,23 @@ image: civisblockchain/builder-ci:0.1.0-local-0
 
 stages:
   - build
-  - test
+  - verify
   - version
   - package
   - push
+
+test:
+  stage: verify
+  before_script:
+    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
+    - docker-compose -f docker-compose-it.yaml up -d
+    - docker network connect bclannet-it $CONTAINER_NAME
+    after_script:
+      - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
+      - docker network disconnect bclannet-it $CONTAINER_NAME
+      - docker-compose -f docker-compose-it.yaml down
+    script:
+      - make test
 
 version:
   stage: version
@@ -19,18 +32,8 @@ version:
 
 package:
   stage: package
-  before_script:
-    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
-    - echo $CONTAINER_NAME
-    - docker-compose -f docker-compose-it.yaml up -d
-    - docker network connect bclannet-it $CONTAINER_NAME
-  after_script:
-    - CONTAINER_NAME=$(docker ps --format '{{.Names}}' --filter name=$HOSTNAME*)
-    - docker network disconnect bclannet-it $CONTAINER_NAME
-    - docker-compose -f docker-compose-it.yaml down
   script:
     - export VERSION_BUILD=$(cat version.build)
-    - echo $VERSION_BUILD
     - make package -e VERSION=${VERSION_BUILD}
 
 push:
