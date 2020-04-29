@@ -15,7 +15,7 @@ import (
 	"encoding/pem"
 	"encoding/base64" 
 
-	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/fabric-chaincode-go/shim"
 )
 
 type Agent struct {
